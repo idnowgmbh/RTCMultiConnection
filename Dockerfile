@@ -9,3 +9,6 @@ COPY . /coaching
 WORKDIR /coaching
 
 RUN npm install
+
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+CMD ["bash", "-c", "source ${BASE_PATH}/environment; /usr/bin/supervisord -n"]

@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  coaching:
+    network_mode: "bridge"
+    image: "coaching"
+    container_name: "de.idnow.coaching"
+    hostname: "coaching.idnow.de"
+    dns: "172.17.0.1"
+    volumes:
+      - /etc/idnow/base/zabbix_proxy.conf:/etc/zabbix/zabbix_agentd.d/zabbix_proxy.conf
+    environment:
+      - play_memory=1024
+      - graylog_host=graylog.idnow.de
+      - GRAYLOG_HOST=graylog.idnow.de
+    ulimits:
+      core: -1
+    ports:
+      - "9001:9001"
