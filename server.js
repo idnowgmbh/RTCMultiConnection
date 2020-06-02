@@ -85,7 +85,7 @@ function serverHandler(request, response) {
         }
 
         var matched = false;
-        ['/demos/', '/dev/', '/dist/', '/socket.io/', '/node_modules/canvas-designer/', '/admin/'].forEach(function(item) {
+        ['/coaching/', '/dev/', '/dist/', '/socket.io/', '/node_modules/canvas-designer/', '/admin/'].forEach(function(item) {
             if (filename.indexOf(resolveURL(item)) !== -1) {
                 matched = true;
             }
@@ -126,12 +126,12 @@ function serverHandler(request, response) {
         try {
             stats = fs.lstatSync(filename);
 
-            if (filename.search(/demos/g) === -1 && filename.search(/admin/g) === -1 && stats.isDirectory() && config.homePage === '/demos/index.html') {
+            if (filename.search(/coaching/g) === -1 && filename.search(/admin/g) === -1 && stats.isDirectory() && config.homePage === '/coaching/index.html') {
                 if (response.redirect) {
-                    response.redirect('/demos/');
+                    response.redirect('/coaching/');
                 } else {
                     response.writeHead(301, {
-                        'Location': '/demos/'
+                        'Location': '/coaching/'
                     });
                 }
                 response.end();
@@ -152,22 +152,22 @@ function serverHandler(request, response) {
                     'Content-Type': 'text/html'
                 });
 
-                if (filename.indexOf(resolveURL('/demos/MultiRTC/')) !== -1) {
-                    filename = filename.replace(resolveURL('/demos/MultiRTC/'), '');
-                    filename += resolveURL('/demos/MultiRTC/index.html');
+                if (filename.indexOf(resolveURL('/coaching/MultiRTC/')) !== -1) {
+                    filename = filename.replace(resolveURL('/coaching/MultiRTC/'), '');
+                    filename += resolveURL('/coaching/MultiRTC/index.html');
                 } else if (filename.indexOf(resolveURL('/admin/')) !== -1) {
                     filename = filename.replace(resolveURL('/admin/'), '');
                     filename += resolveURL('/admin/index.html');
-                } else if (filename.indexOf(resolveURL('/demos/dashboard/')) !== -1) {
-                    filename = filename.replace(resolveURL('/demos/dashboard/'), '');
-                    filename += resolveURL('/demos/dashboard/index.html');
-                } else if (filename.indexOf(resolveURL('/demos/video-conference/')) !== -1) {
-                    filename = filename.replace(resolveURL('/demos/video-conference/'), '');
-                    filename += resolveURL('/demos/video-conference/index.html');
-                } else if (filename.indexOf(resolveURL('/demos')) !== -1) {
-                    filename = filename.replace(resolveURL('/demos/'), '');
-                    filename = filename.replace(resolveURL('/demos'), '');
-                    filename += resolveURL('/demos/index.html');
+                } else if (filename.indexOf(resolveURL('/coaching/dashboard/')) !== -1) {
+                    filename = filename.replace(resolveURL('/coaching/dashboard/'), '');
+                    filename += resolveURL('/coaching/dashboard/index.html');
+                } else if (filename.indexOf(resolveURL('/coaching/video-conference/')) !== -1) {
+                    filename = filename.replace(resolveURL('/coaching/video-conference/'), '');
+                    filename += resolveURL('/coaching/video-conference/index.html');
+                } else if (filename.indexOf(resolveURL('/coaching')) !== -1) {
+                    filename = filename.replace(resolveURL('/coaching/'), '');
+                    filename = filename.replace(resolveURL('/coaching'), '');
+                    filename += resolveURL('/coaching/index.html');
                 } else {
                     filename += resolveURL(config.homePage);
                 }
